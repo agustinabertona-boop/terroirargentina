@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas de Cata</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #fdfdfd;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 6px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #800000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #a00000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ficha de Notas de Cata</h1>
+  <form id="cataForm">
+    <h2>Les Abymes (2022)</h2>
+    <label>Aroma</label><textarea name="abymes_aroma"></textarea>
+    <label>Sabor</label><textarea name="abymes_sabor"></textarea>
+    <label>Notas</label><textarea name="abymes_notas"></textarea>
+
+    <h2>Le Temps est Venu (2021)</h2>
+    <label>Aroma</label><textarea name="temps_aroma"></textarea>
+    <label>Sabor</label><textarea name="temps_sabor"></textarea>
+    <label>Notas</label><textarea name="temps_notas"></textarea>
+
+    <h2>Saint Fiacre (2018)</h2>
+    <label>Aroma</label><textarea name="fiacre_aroma"></textarea>
+    <label>Sabor</label><textarea name="fiacre_sabor"></textarea>
+    <label>Notas</label><textarea name="fiacre_notas"></textarea>
+
+    <button type="button" onclick="generarPDF()">Descargar PDF</button>
+  </form>
+
+  <script>
+    function generarPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const form = document.getElementById("cataForm");
+      const data = new FormData(form);
+
+      let y = 20;
+      doc.setFontSize(16);
+      doc.text("Notas de Cata", 20, y);
+      y += 10;
+
+      const vinos = [
+        {nombre: "Les Abymes (2022)", campos:["abymes_aroma","abymes_sabor","abymes_notas"]},
+        {nombre: "Le Temps est Venu (2021)", campos:["temps_aroma","temps_sabor","temps_notas"]},
+        {nombre: "Saint Fiacre (2018)", campos:["fiacre_aroma","fiacre_sabor","fiacre_notas"]}
+      ];
+
+      doc.setFontSize(12);
+      vinos.forEach(vino => {
+        doc.text(vino.nombre, 20, y);
+        y += 8;
+        vino.campos.forEach(campo => {
+          let valor = data.get(campo) || "";
+          doc.text("- " + valor, 25, y);
+          y += 8;
+        });
+        y += 5;
+      });
+
+      doc.save("Notas_de_Cata.pdf");
+    }
+  </script>
+</body>
+</html>
