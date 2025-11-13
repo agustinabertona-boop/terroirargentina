@@ -1,98 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Notas de Cata</title>
+  <meta charset="UTF-8" />
+  <title>Cata Vino a Aprender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Librería jsPDF desde CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #fdfdfd;
-    }
-    h2 {
-      margin-top: 30px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #faf7f4;
       color: #333;
     }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
     }
-    textarea, input {
-      width: 100%;
-      padding: 6px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
     }
-    button {
+    h2 {
+      font-size: 18px;
       margin-top: 20px;
-      padding: 12px 20px;
-      background: #800000;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-bottom: 4px;
     }
-    button:hover {
-      background: #a00000;
+    p {
+      margin: 2px 0;
+      font-size: 14px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      padding: 8px;
+      margin: 6px 0 12px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      resize: vertical;
+    }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #b53b4c;
+      color: #fff;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .nota-final {
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
-  <h1>Ficha de Notas de Cata</h1>
-  <form id="cataForm">
-    <h2>Les Abymes (2022)</h2>
-    <label>Aroma</label><textarea name="abymes_aroma"></textarea>
-    <label>Sabor</label><textarea name="abymes_sabor"></textarea>
-    <label>Notas</label><textarea name="abymes_notas"></textarea>
+  <div class="container">
+    <h1>Cata Vino a Aprender</h1>
+    <p><strong>Tema:</strong> <!-- Cambiá esto cada cata --> Tres vinos para descubrir proyectos con identidad</p>
+    <p><strong>Fecha:</strong> <!-- Cambiá la fecha --> 00/00/2025</p>
+    <hr />
 
-    <h2>Le Temps est Venu (2021)</h2>
-    <label>Aroma</label><textarea name="temps_aroma"></textarea>
-    <label>Sabor</label><textarea name="temps_sabor"></textarea>
-    <label>Notas</label><textarea name="temps_notas"></textarea>
+    <!-- VINO 1 -->
+    <h2>Vino 1</h2>
+    <p><strong>Nombre:</strong> <!-- Ej: Malbec x Bodega Tal --> Nombre del vino 1</p>
+    <p><strong>Bodega / Proyecto:</strong> Proyecto / Bodega 1</p>
+    <p><strong>Variedad:</strong> Variedad 1</p>
+    <p><strong>Origen / Zona:</strong> Origen 1</p>
 
-    <h2>Saint Fiacre (2018)</h2>
-    <label>Aroma</label><textarea name="fiacre_aroma"></textarea>
-    <label>Sabor</label><textarea name="fiacre_sabor"></textarea>
-    <label>Notas</label><textarea name="fiacre_notas"></textarea>
+    <label for="vino1_nariz">Nariz (¿a qué te huele?):</label>
+    <textarea id="vino1_nariz" placeholder="Fruta roja, flores, hierbas, especias… lo que sientas."></textarea>
 
-    <button type="button" onclick="generarPDF()">Descargar PDF</button>
-  </form>
+    <label for="vino1_boca">Boca (¿cómo lo sentís?):</label>
+    <textarea id="vino1_boca" placeholder="Suave, fresco, intenso, largo, corto… lo que te deje en la boca."></textarea>
+
+    <label for="vino1_nota">Notas u observaciones:</label>
+    <textarea id="vino1_nota" placeholder="¿Te gustó? ¿Con qué lo tomarías?"></textarea>
+
+    <hr />
+
+    <!-- VINO 2 -->
+    <h2>Vino 2</h2>
+    <p><strong>Nombre:</strong> Nombre del vino 2</p>
+    <p><strong>Bodega / Proyecto:</strong> Proyecto / Bodega 2</p>
+    <p><strong>Variedad:</strong> Variedad 2</p>
+    <p><strong>Origen / Zona:</strong> Origen 2</p>
+
+    <label for="vino2_nariz">Nariz (¿a qué te huele?):</label>
+    <textarea id="vino2_nariz" placeholder="Fruta, flores, hierbas, especias…"></textarea>
+
+    <label for="vino2_boca">Boca (¿cómo lo sentís?):</label>
+    <textarea id="vino2_boca" placeholder="Suave, fresco, intenso, largo, corto…"></textarea>
+
+    <label for="vino2_nota">Notas u observaciones:</label>
+    <textarea id="vino2_nota" placeholder="¿Qué te generó este vino?"></textarea>
+
+    <hr />
+
+    <!-- VINO 3 -->
+    <h2>Vino 3</h2>
+    <p><strong>Nombre:</strong> Nombre del vino 3</p>
+    <p><strong>Bodega / Proyecto:</strong> Proyecto / Bodega 3</p>
+    <p><strong>Variedad:</strong> Variedad 3</p>
+    <p><strong>Origen / Zona:</strong> Origen 3</p>
+
+    <label for="vino3_nariz">Nariz (¿a qué te huele?):</label>
+    <textarea id="vino3_nariz" placeholder="Fruta, flores, hierbas, especias…"></textarea>
+
+    <label for="vino3_boca">Boca (¿cómo lo sentís?):</label>
+    <textarea id="vino3_boca" placeholder="Suave, fresco, intenso, largo, corto…"></textarea>
+
+    <label for="vino3_nota">Notas u observaciones:</label>
+    <textarea id="vino3_nota" placeholder="¿Lo repetirías? ¿En qué momento?"></textarea>
+
+    <hr />
+
+    <!-- NOTA FINAL -->
+    <h2>Notas finales de la cata</h2>
+    <label for="nota_final">¿Con qué vino te quedás hoy y por qué?</label>
+    <textarea id="nota_final" class="nota-final" placeholder="Elegí uno y contate a vos mism@ por qué."></textarea>
+
+    <button class="btn" onclick="descargarPDF()">Descargar mis notas en PDF</button>
+  </div>
 
   <script>
-    function generarPDF() {
+    async function descargarPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      const form = document.getElementById("cataForm");
-      const data = new FormData(form);
+      const vino1Nariz = document.getElementById('vino1_nariz').value || "";
+      const vino1Boca = document.getElementById('vino1_boca').value || "";
+      const vino1Nota = document.getElementById('vino1_nota').value || "";
 
-      let y = 20;
-      doc.setFontSize(16);
-      doc.text("Notas de Cata", 20, y);
+      const vino2Nariz = document.getElementById('vino2_nariz').value || "";
+      const vino2Boca = document.getElementById('vino2_boca').value || "";
+      const vino2Nota = document.getElementById('vino2_nota').value || "";
+
+      const vino3Nariz = document.getElementById('vino3_nariz').value || "";
+      const vino3Boca = document.getElementById('vino3_boca').value || "";
+      const vino3Nota = document.getElementById('vino3_nota').value || "";
+
+      const notaFinal = document.getElementById('nota_final').value || "";
+
+      let y = 10;
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(14);
+      doc.text("Cata Vino a Aprender", 10, y);
+      y += 8;
+      doc.setFontSize(11);
+      doc.setFont("Helvetica", "normal");
+      doc.text("Notas personales de cata", 10, y);
       y += 10;
 
-      const vinos = [
-        {nombre: "Les Abymes (2022)", campos:["abymes_aroma","abymes_sabor","abymes_notas"]},
-        {nombre: "Le Temps est Venu (2021)", campos:["temps_aroma","temps_sabor","temps_notas"]},
-        {nombre: "Saint Fiacre (2018)", campos:["fiacre_aroma","fiacre_sabor","fiacre_notas"]}
-      ];
+      function addBlock(title, contentArray) {
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text(title, 10, y);
+        y += 6;
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(10);
 
-      doc.setFontSize(12);
-      vinos.forEach(vino => {
-        doc.text(vino.nombre, 20, y);
-        y += 8;
-        vino.campos.forEach(campo => {
-          let valor = data.get(campo) || "";
-          doc.text("- " + valor, 25, y);
-          y += 8;
+        contentArray.forEach(line => {
+          const split = doc.splitTextToSize(line, 180);
+          split.forEach(part => {
+            if (y > 280) {
+              doc.addPage();
+              y = 10;
+            }
+            doc.text(part, 10, y);
+            y += 5;
+          });
+          y += 2;
         });
-        y += 5;
-      });
+        y += 4;
+      }
 
-      doc.save("Notas_de_Cata.pdf");
+      addBlock("Vino 1", [
+        "Nariz: " + vino1Nariz,
+        "Boca: " + vino1Boca,
+        "Notas: " + vino1Nota
+      ]);
+
+      addBlock("Vino 2", [
+        "Nariz: " + vino2Nariz,
+        "Boca: " + vino2Boca,
+        "Notas: " + vino2Nota
+      ]);
+
+      addBlock("Vino 3", [
+        "Nariz: " + vino3Nariz,
+        "Boca: " + vino3Boca,
+        "Notas: " + vino3Nota
+      ]);
+
+      addBlock("Notas finales", [
+        notaFinal
+      ]);
+
+      doc.save("mis_notas_de_cata_vino_a_aprender.pdf");
     }
   </script>
 </body>
